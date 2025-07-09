@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[error_code]
-pub enum BettingError {
+pub enum Error {
     #[msg("Market has already been resolved")]
     MarketAlreadyResolved,
 
