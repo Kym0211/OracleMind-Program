@@ -14,7 +14,11 @@ pub struct PlaceBet<'info> {
     #[account(mut)]
     pub signer: Signer<'info>,
 
-    #[account(mut)]
+    #[account( 
+        mut,
+        seeds = [b"market-account", market_account.title.as_ref()],
+        bump = market_account.bump
+    )]
     pub market_account: Account<'info, Market>,
 
     #[account(
@@ -64,17 +68,21 @@ impl<'info> PlaceBet<'info> {
         let end_time = self.market_account.end_time;
         let is_resolved = self.market_account.is_resolved;
 
+        let bettor_ata_amount = self.bettor_ata.amount;
+
         require!(time_stamp < end_time, Errors::MarketEndTimeExceeded);
 
         require!(is_resolved == false, Errors::MarketAlreadyResolved);
 
         require!(amount != 0, Errors::Unauthorized);
 
+        require!(bettor_ata_amount >= amount, Errors::InsufficientBetAmount);
+
         let cpi_program = self.token_program.to_account_info();
 
         let cpi_accounts = Transfer { 
-            from: self.vault.to_account_info(), 
-            to: self.bettor_ata.to_account_info(), 
+            from: self.bettor_ata.to_account_info(), 
+            to: self.vault.to_account_info(), 
             authority: self.signer.to_account_info()
         };
 
