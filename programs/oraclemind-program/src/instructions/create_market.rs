@@ -19,7 +19,7 @@ pub struct CreateMarket<'info> {
     #[account(
         init,
         payer = signer,
-        seeds = [b"market-acount", title.as_bytes()],
+        seeds = [b"market-account", title.as_bytes()],
         bump,
         space = 8 + Market::INIT_SPACE
     )]
