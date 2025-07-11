@@ -1,7 +1,10 @@
 use anchor_lang::prelude::*;
 
 #[error_code]
-pub enum Error {
+pub enum Errors {
+    #[msg("Unauthorized")]
+    InvalidMarketMaker,
+    
     #[msg("Market has already been resolved")]
     MarketAlreadyResolved,
 
