@@ -37,8 +37,8 @@ pub mod oraclemind_program {
         ctx.accounts.resolve_market_handler(result)
     }
 
-    pub fn claim_winnings(ctx: Context<ResolveMarket>, result: bool) -> Result<()> {
-        ctx.accounts.resolve_market_handler(result)
+    pub fn claim_winnings(ctx: Context<ClaimWinnings>) -> Result<()> {
+        ctx.accounts.claim_winnings_handler()
     }
 
 

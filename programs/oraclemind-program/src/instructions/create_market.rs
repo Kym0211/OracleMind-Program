@@ -52,7 +52,7 @@ impl<'info> CreateMarket<'info> {
         bumps: &CreateMarketBumps
     ) -> Result<()> {
 
-        require!(self.signer.key().to_string() == MARKET_MAKER, Errors::InvalidMarketMaker);
+        // require!(self.signer.key().to_string() == MARKET_MAKER, Errors::InvalidMarketMaker);
         
         self.market_account.set_inner(Market { 
             creator: self.signer.key(), 

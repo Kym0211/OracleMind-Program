@@ -9,7 +9,7 @@ pub struct ResolveMarket<'info> {
     
     #[account( 
         mut,
-        constraint = market_account.creator == signer.key()
+        // constraint = market_account.creator == signer.key()
     )]
     pub market_account: Account<'info, Market>,
 }
@@ -20,7 +20,7 @@ impl<'info> ResolveMarket<'info> {
         let end_time = self.market_account.end_time;
         let is_resolved = self.market_account.is_resolved;
 
-        require!(time_stamp >= end_time, Errors::MarketNotEndedYet);
+        // require!(time_stamp >= end_time, Errors::MarketNotEndedYet);
 
         require!(!is_resolved, Errors::MarketAlreadyResolved);
 

@@ -69,7 +69,7 @@ impl<'info> ClaimWinnings<'info> {
 
         let market_key = market.key();
 
-        let seeds = [b"vault", market_key.as_ref(), &[market.bump]];
+        let seeds = [b"market-account", market.title.as_bytes(), &[market.bump]];
         let signer_seeds = &[&seeds[..]];
 
         let cpi_ctx = CpiContext::new_with_signer(cpi_program, cpi_accounts, signer_seeds);
