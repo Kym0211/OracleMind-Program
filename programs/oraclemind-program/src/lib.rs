@@ -22,5 +22,24 @@ pub mod oraclemind_program {
         ctx.accounts.create_market_handler(title, end_time, &ctx.bumps)
     }
 
+    pub fn place_bet(
+        ctx: Context<PlaceBet>,  
+        bet_side: bool, 
+        amount: u64,
+    ) -> Result<()> {
+        ctx.accounts.place_bet_handler(bet_side, amount, &ctx.bumps)
+    }
+
+    pub fn resolve_market(
+        ctx: Context<ResolveMarket>,  
+        result: bool,
+    ) -> Result<()> {
+        ctx.accounts.resolve_market_handler(result)
+    }
+
+    pub fn claim_winnings(ctx: Context<ResolveMarket>, result: bool) -> Result<()> {
+        ctx.accounts.resolve_market_handler(result)
+    }
+
 
 }
